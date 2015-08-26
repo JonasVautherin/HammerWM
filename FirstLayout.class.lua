@@ -2,6 +2,11 @@ dofile("Layout.abstract.class")
 
 FirstLayout = Layout:new()
 
+function FirstLayout:new(nWindowsRight)
+  self.nWindowsRight = nWindowsRight or 2
+  return self
+end
+
 function FirstLayout:render(windows)
   local mainWindowSet = false
   local secondaryWindowCount = 0
@@ -18,14 +23,14 @@ function FirstLayout:render(windows)
             }
             hs.layout.apply(layoutLeft)
         else
-          if (secondaryWindowCount < 3) then
+          if (secondaryWindowCount < self.nWindowsRight) then
             local frame = window:frame()
             local max = window:screen():frame()
 
             frame.x = max.w / 2
-            frame.y = secondaryWindowCount * (max.h / 3) 
+            frame.y = secondaryWindowCount * (max.h / self.nWindowsRight) 
             frame.w = max.w / 2
-            frame.h = max.h / 3
+            frame.h = max.h / self.nWindowsRight
             window:setFrame(frame)
 
             secondaryWindowCount = secondaryWindowCount + 1
