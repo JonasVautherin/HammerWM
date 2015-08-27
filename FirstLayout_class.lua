@@ -1,4 +1,4 @@
-dofile("Layout.abstract.class")
+require("Layout")
 
 FirstLayout = Layout:new()
 

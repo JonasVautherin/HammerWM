@@ -1,14 +1,14 @@
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
-  hs.alert.show("Hello, World")
-end)
+package.path = package.path .. ";?_abstract_class.lua;?_class.lua"
 
-hs.hotkey.bind({"cmd"}, "e", hs.hints.windowHints)
+showHints = function()
+  hs.hints.windowHints()
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "G", function()
+showGrid = function()
   hs.grid.show()
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "P", function()
+rotateLayout = function()
   --[[
     Ideally, we might want to have some config loading
     the correct templates in a list, and a global state
@@ -16,12 +16,12 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "P", function()
     can rotate like in AWM...
   --]]
 
-  require("FirstLayout.class.lua")
+  require("FirstLayout")
   a = FirstLayout:new(2)
   a:render(nil)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
+activeWinLeft50 = function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -32,9 +32,9 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
+activeWinRight50 = function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -45,9 +45,9 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
+activeWinUp50 = function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -58,9 +58,9 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   f.w = max.w
   f.h = max.h / 2
   win:setFrame(f)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
+activeWinDown50 = function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -71,9 +71,9 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   f.w = max.w
   f.h = max.h / 2
   win:setFrame(f)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
+activeWinMaximize = function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -84,10 +84,11 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "/", function()
   f.w = max.w
   f.h = max.h
   win:setFrame(f)
-end)
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
+reload = function()
   hs.reload()
-end)
+end
 
+require("bindings")
 hs.alert.show("Config loaded")
