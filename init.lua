@@ -21,18 +21,8 @@ rotateLayout = function(reverse)
 
   -- Load the next layout with its (optional) parameters
   local layout = require(layoutsList[currentLayoutId][1]):new(layoutsList[currentLayoutId][2])
+  hs.alert.show(layout:name()) --TODO Show that in a better way, or not at all?
   layout:render()
-  hs.alert.show(layout:name()) --TODO Show that in a better way
-end
-
-loadLayouts = function()
-  -- TODO Load them from the layouts directory directly, and have the parameters in config.lua?
-  layoutsList = {
-    { "FirstLayout", nil },
-    { "DummyLayout", nil },
-    { "DummyLayout2", nil }
-  }
-  return layoutsList
 end
 
 activeWinLeft50 = function()
