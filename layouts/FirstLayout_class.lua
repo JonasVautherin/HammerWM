@@ -7,6 +7,10 @@ function FirstLayout:new(nWindowsRight)
   return self
 end
 
+function FirstLayout:name()
+  return "FirstLayout"
+end
+
 function FirstLayout:render(windows)
   local mainWindowSet = false
   local secondaryWindowCount = 0
@@ -42,3 +46,5 @@ function FirstLayout:render(windows)
     end
   end
 end
+
+return FirstLayout

@@ -8,18 +8,31 @@ showGrid = function()
   hs.grid.show()
 end
 
-rotateLayout = function()
-  --[[
-    Ideally, we might want to have some config loading
-    the correct templates in a list, and a global state
-    knowing which one is currently in use, so that we 
-    can rotate like in AWM...
-  --]]
-count = 1;
-hs.alert.show("hello")
-  require("FirstLayout")
-  a = FirstLayout:new(2)
-  a:render(nil)
+rotateLayoutReverse = function()
+  rotateLayout(true)
+end
+
+rotateLayout = function(reverse)
+  local increment = reverse and -1 or 1
+
+  currentLayoutId = currentLayoutId or 0
+  layoutsList = layoutsList or loadLayouts()
+  currentLayoutId = ((currentLayoutId - 1 + increment) % #layoutsList) + 1
+
+  -- Load the next layout with its (optional) parameters
+  local layout = require(layoutsList[currentLayoutId][1]):new(layoutsList[currentLayoutId][2])
+  layout:render()
+  hs.alert.show(layout:name()) --TODO Show that in a better way
+end
+
+loadLayouts = function()
+  -- TODO Load them from the layouts directory directly, and have the parameters in config.lua?
+  layoutsList = {
+    { "FirstLayout", nil },
+    { "DummyLayout", nil },
+    { "DummyLayout2", nil }
+  }
+  return layoutsList
 end
 
 activeWinLeft50 = function()
@@ -91,5 +104,5 @@ reload = function()
   hs.reload()
 end
 
-require("bindings")
+require("config")
 hs.alert.show("Config loaded")

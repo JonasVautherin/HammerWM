@@ -10,3 +10,7 @@ end
 function Layout:render(windows)
   error("Not implemented")
 end
+
+function Layout:name()
+  error("Not implemented")
+end
