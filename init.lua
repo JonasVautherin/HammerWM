@@ -1,4 +1,4 @@
-package.path = package.path .. ";?_abstract_class.lua;?_class.lua"
+package.path = package.path .. ";layouts/?_abstract_class.lua;layouts/?_class.lua;utils/?_class.lua"
 
 showHints = function()
   hs.hints.windowHints()
@@ -15,7 +15,8 @@ rotateLayout = function()
     knowing which one is currently in use, so that we 
     can rotate like in AWM...
   --]]
-
+count = 1;
+hs.alert.show("hello")
   require("FirstLayout")
   a = FirstLayout:new(2)
   a:render(nil)
