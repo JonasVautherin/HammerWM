@@ -16,7 +16,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "P", function()
     can rotate like in AWM...
   --]]
 
-  dofile("FirstLayout.class")
+  require("FirstLayout.class.lua")
   a = FirstLayout:new(2)
   a:render(nil)
 end)
