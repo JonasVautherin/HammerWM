@@ -1,5 +1,7 @@
 package.path = package.path .. ";layouts/?_abstract_class.lua;layouts/?_class.lua;utils/?_class.lua"
 
+require("utils/utils")
+
 showHints = function()
   hs.hints.windowHints()
 end

@@ -52,14 +52,36 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "tab", function()
   end
 end)
 
-loadLayouts = function()
-  -- TODO Load them from the layouts directory directly, and have the parameters in config.lua?
+--[[
+  Return a list of classes + parameters, in the form:
+
   layoutsList = {
-    { "FirstLayout", nil },
-    { "DummyLayout", nil },
-    { "DummyLayout2", nil }
+    { "Layout1", nil },
+    { "Layout2", {2, "my param"} }
   }
-  return layoutsList
+  
+  The (optional) parameters are stored in layouts/config.lua.
+--]]
+loadLayouts = function()
+  local paramsList = require("layouts/config")
+  return collectLayouts(paramsList)
 end
 
+collectLayouts = function(paramsList)
+  local paramsList = paramsList or {}
+  local layoutsList = {}
 
+  -- Templates are the classes in the "layouts" directory
+  local dirs = scandir("layouts")
+
+  for _, dir in ipairs(dirs) do
+    local className = string.match(dir, "(.+)_class")
+
+    -- Filter out abstract classes
+    if className ~= nil and not string.match(className, ".+_abstract") then
+      table.insert(layoutsList, { className, paramsList[className] })
+    end
+  end
+
+  return layoutsList
+end
